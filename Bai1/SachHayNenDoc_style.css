@@ -1,0 +1,56 @@
+#header
+{
+    font-family: Tahoma;
+    color: orange;
+    text-align: center;
+}
+
+#parent_div
+{
+    text-align: center;
+    position: relative;
+    border-style: double;
+    border-color: rgb(0, 162, 255);
+    min-height: 280px;
+    padding: 20px;
+    margin: auto
+}
+
+#child_div
+{
+    text-align: center;
+    position: relative;
+    min-height: 1px;
+    padding: 10px;
+    width: 20%;
+    float: left;
+    background-color: #EFEFF1;
+    margin: 15px;
+}
+
+#child1_div
+{
+    position: relative;
+    margin-bottom: 30px;
+}
+
+#child2_div
+{
+    /* border: 1px solid #E6E6EA; */
+    min-height: 280px;
+    padding: 10px
+}
+
+
+#img_tag
+{
+    padding: 2px;
+}
+
+#p_tag
+{
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 22px;
+    color: #848484;
+}
