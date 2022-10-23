@@ -1,0 +1,15 @@
+- Install Django:
+pip install django
+
+- Start ptoject:
+django-admin startproject <project name>
+
+- Run server: (cd to the project folder)
+python manage.py runserver
+python manage.py migrate
+
+- Start django app
+python manage.py startapp <app name>
+
+- Create super user
+python manage.py createsuperuser
