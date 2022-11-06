@@ -39,6 +39,7 @@ class NhanVien:
         self.tn_sau_thue = self.tn_truoc_thue - self.thue_TNCN
         
     def ket_qua(self):
+        print(f'Thống kê của nhân viên: {self.ho_ten}')
         print(f'Thu nhập trước thuế: {self.tn_truoc_thue:,}')
         print(f'Thu nhập chịu thuế: {self.tn_chiu_thue:,}')
         print(f'Thuế thu nhập cá nhân: {self.thue_TNCN:,}')
@@ -49,6 +50,7 @@ class NhanVien:
         pass
     
     def __str__(self):
+        self.tinh_luong()
         result = "Họ và tên: " + self.ho_ten + '\n'
         result += "Hệ số lương: " + str(self.he_so_luong) + '\n'
         result += "Số người giảm trừ gia cảnh: " + str(self.gia_canh) + '\n'
@@ -60,19 +62,54 @@ class NhanVien:
         result += "Thu nhập sau thuế: " + str(self.tn_sau_thue) + '\n'
         return result
 
-# class QuanLyNhanVien:
-#     '''
-#     class QuanLyNhanVien
-#     '''
-#     def __init__(self):
+class QuanLyNhanVien:
+    '''
+    class QuanLyNhanVien
+    '''
+    def __init__(self):
+        print('ctor QuanLyNhanVien')
+        self.__danh_sach_NV = []
+
+    def NhapNhanVien(self):
+        while(1):
+            ho_ten = input("Nhập họ và tên nhân viên: ")
+            he_so_luong = float(input("Nhập hệ số lương: "))
+            giam_tru_gia_canh = int(input("Nhập số người giảm trừ gia cảnh: "))
+            thu_lao = float(input("Nhập thù lao công việc: "))
+            nv = NhanVien(ho_ten, he_so_luong, giam_tru_gia_canh, thu_lao)
+            self.__danh_sach_NV.append(nv)
+            if not int(input('Tiếp tục nhập nhân viên? 0 no : 1 yes')):
+                break
+
+    def ThongTinNhanVien(self):
+        print(f'Số nhân viên đang được quản lý: {len(self.__danh_sach_NV)}')
+        for i in range(len(self.__danh_sach_NV)):
+            print(f'Nhân viên {i + 1}: {self.__danh_sach_NV[i].ho_ten}')
+
+    def __del__(slef):
+        print('dtor QuanLyNhanVien')
         
+    def __str__(self):
+        for nv in self.__danh_sach_NV:
+            print(nv)
+      
 
 def main():
-    nv = NhanVien('Lại Minh Hà', 2.67, 1, 12000000)
-    nv.tinh_luong()
-    nv.ket_qua()
+    # ho_ten = input("Nhập họ và tên nhân viên: ")
+    # he_so_luong = int(input("Nhập hệ số lương: "))
+    # giam_tru_gia_canh = int(input("Nhập số người giảm trừ gia cảnh: "))
+    # thu_lao = int(input("Nhập thù lao công việc: "))
+    
+    # nv1 = NhanVien('Lại Minh Hà', 2.67, 1, 12000000)
+    # nv1.tinh_luong()
+    # nv1.ket_qua()
+    # nv2 = NhanVien(ho_ten, he_so_luong, giam_tru_gia_canh, thu_lao)
+    # print(nv2)
+    mgr = QuanLyNhanVien()
+    mgr.NhapNhanVien()
+    mgr.ThongTinNhanVien()
+    mgr.__str__()
     # print(nv)
     
 if __name__ == "__main__":
     main()
-        
