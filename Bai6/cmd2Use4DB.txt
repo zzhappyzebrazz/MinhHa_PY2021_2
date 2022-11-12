@@ -1,0 +1,14 @@
+ - Initial sqlite3 database:
+python manage.py migrate
+
+ - Alias model to database:
+python manage.py makemigrations <app>
+
+ - SQL command that generated:
+python manage.py sqlmigrate <app> 0001
+
+ - Enter IPython shell (work like jupiter-nodbook):
+python manage.py shell
+
+ - Create superuser for browser database in localhost/admin/
+python manage.py createsuperuser
