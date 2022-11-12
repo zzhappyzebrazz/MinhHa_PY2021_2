@@ -1,0 +1,35 @@
+.my-btn {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: transparent;
+}
+
+
+.product-item .product-price .my-btn {
+    float: right;
+    border: none;
+    color: #000000;
+    background: #FF6F61;
+}
+
+.product-item:hover .product-price .my-btn,
+.product-item .product-price .my-btn:hover {
+    color: #FF6F61;
+    background: #ffffff;
+}
+
+.product-item .product-price .my-btn i {
+    margin-right: 5px;
+}
+
+.cart-page-inner .align-middle .img img {
+    max-width: 60px;
+    max-height: 60px;
+    margin-right: 15px;
+}
+
+.product-item .product-price h3 {
+    font-size: 20px !important;
+}
