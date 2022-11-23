@@ -1,0 +1,35 @@
+- Thêm đường dẫn trong file HTML:
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('stories.urls')),
+]
+//////////////////////////////////
+urlpatterns = [
+    path('', index, name="index"),
+    path('category/', category, name="category"),
+    path('contact/', contact, name="contact"),
+    path('story/', story, name="story"),
+]
+///////////////
+href="{% url 'index' %}">Home
+
+
+- Tạo Views với tham số nhận vào:
+
+def story(request, id):
+    content = Story.objects.get(id=id) #get 1 object
+    print(content.name)
+    return render(request, 'stories/story.html',{
+        'content' : content,
+    })
+/////////////////////////////////////////
+<a href="{% url 'story' story.id %}" class="text-white"> {{ story.name }} </a>
+///////////////////////////////
+urlpatterns = [
+    path('', index, name="index"),
+    path('category/<int:pk>/', category, name="category"),
+    path('story/<int:id>/', story, name="story"),
+    path('contact/', contact, name="contact"),
+
+]
