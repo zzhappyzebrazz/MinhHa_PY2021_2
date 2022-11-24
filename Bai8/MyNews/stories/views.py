@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from stories.models import Category, Story
 from django.utils import timezone
+import re
+from django.core.paginator import Paginator
 
 story_list = Story.objects.order_by("-public_day")
 next_4_stories = story_list[1:5]
@@ -38,10 +40,24 @@ def category(request, pk):
     category_name = name.name
     newest_story = stories[:-4]
 
+    for story in stories:
+        story.content = re.sub('<[^<]+?>', '', story.content)
+    
+    page = request.GET.get('page', 1) #trang bat dau
+    paginator = Paginator(stories, 4) # so story/trang
+    
+    try:
+        stories_list = paginator.page(page)
+    except PageNotAnInteger:
+        stories_list = paginator.page(1)
+    except EmptyPage:
+        stories_list = paginator.page(paginator.num_pages)
+        
+    
     return render(request, 'stories/category.html',
                   {
                       'now' : now,
-                      'stories': stories,
+                      'stories_list': stories_list,
                       'newest_story' : newest_story,
                       'stories_4' :stories_4,
                       'category_name' : category_name,

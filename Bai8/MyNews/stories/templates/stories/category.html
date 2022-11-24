@@ -11,7 +11,7 @@
                     <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">{{ category_name }}</div>
                 </div>
 
-                {% for story in stories %}
+                {% for story in stories_list %}
                 <div class="row pb-4">
                     <div class="col-md-5">
                         <a class="nav-link" href="{% url 'story' story.id %}">
@@ -53,16 +53,42 @@
                 
             </div>
         </div>
+
         <div class="row mx-0">
-            <div class="col-12 text-center pb-4 pt-4">
-                <a href="#" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; Previous</a>
-                <a href="#" class="btn_pagging">1</a>
-                <a href="#" class="btn_pagging">2</a>
-                <a href="#" class="btn_pagging">3</a>
-                <a href="#" class="btn_pagging">...</a>
-                <a href="#" class="btn_mange_pagging">Next <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
-             </div>
+            <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
+                <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">{{ category_name }}
+                </div>
+                <div class="row mx-0">
+                    <div class="col-12 text-center pb-4 pt-4">
+                    {% if stories_list.has_other_pages %}
+                        {% if stories_list.has_previous %}
+                            <a href="?page={{ stories_list.previous_page_number }}" class="btn_mange_pagging">
+                                <i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; Previous
+                            </a>
+                        {% else %}
+                            <div class="disable"><span></span></div>
+                        {% endif %}
+
+                        {% for i in stories.paginator.page_range %}
+                            {% if stories_list.number == i %}
+                                <a href="?page={{ i }}" class="btn_pagging active">{{ i }}</a>
+                            {% else %}
+                                <a href="?page={{ i }}" class="btn_pagging ">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if stories_list.has_next %}
+                            <a href="?page={{ stories_list.next_page_number }}" class="btn_pagging ">Next </a>
+                            <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;</a>
+                        {% else %}
+                            <div class="disable"><span></span></div>
+                        {% endif %}
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
+        
     </div>
 </div>
 
