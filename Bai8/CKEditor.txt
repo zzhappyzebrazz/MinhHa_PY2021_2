@@ -1,0 +1,34 @@
+#install ckeditor to edit content inside the admin site
+pip install django-ckeditor
+
+#khai bao app ckeditor in INSTALLED_APPS settings.py
+'ckeditor'
+'ckeditor_uploader'
+
+#khai bao cac duong dan settings.py
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}
+
+#run command to copy static CKEditor in STATIC_ROOT
+python manage.py collectstatic
+
+#khai bao duong dan cho ckeditor in urls patterns /MyNews/MyNews/urls.py
+    re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
+
+#using RichTextUploadingField to using ckeditor feature for attributes
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+content = RichTextUploadingField(blank=True, null=True)
+
+#after updating class in models.py run migrate to update database
+python manage.py makemigrations
+python manage.py migrate
+
+
